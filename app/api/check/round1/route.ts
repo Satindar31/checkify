@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    const check = await prisma.website.findMany({
+    const checks = await prisma.website.findMany({
       orderBy: {
         createdAt: "asc",
       },
@@ -15,7 +15,7 @@ export async function GET() {
         "https://" + process.env.VERCEL_URL + "/api/check/round2"
     );
 
-    check.map(async (check) => {
+    checks.map(async (check) => {
       const response = await fetch(check.url);
       if (!response.ok) {
         // TODO SEND EMAIL ALERT TO CHECK OWNER
@@ -35,4 +35,5 @@ export async function GET() {
   } finally {
     await prisma.$disconnect();
   }
+  return new Response("RUNNING CHECKS")
 }

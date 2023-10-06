@@ -29,4 +29,5 @@ export async function GET() {
       status: 200,
     });
   });
+  return new Response("RUNNING CHECKS")
 }
