@@ -17,7 +17,9 @@ export default async function DashboardPage() {
     body: JSON.stringify({
       userId: user?.id,
     }),
-    cache: "no-cache",
+    next: {
+      revalidate: 3600
+    }
   });
   const data = await response.json();
 

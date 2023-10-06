@@ -11,12 +11,12 @@ export default function AdminDashboard() {
 
   async function triggerAllChecks() {
     toast("Triggering all checks...");
-    fetch((process.env.URL + "/api/check/round1") ?? process.env.VERCEL_URL + '/api/check/round1').then((res) => {
+    fetch((process.env.NEXT_PUBLIC_URL + "/api/check/round1") ?? process.env.VERCEL_URL + '/api/check/round1', { cache: 'no-cache' }).then((res) => {
       if(res.ok) return toast.success("Successfully triggered all checks.")
       return toast.error("Something went wrong while triggering all checks.")
     });
   }
-  if (user?.emailAddresses[0].emailAddress == process.env.ADMIN_EMAIL) {
+  if (user?.publicMetadata.role == "admin") {
     toast.success("Welcome back, " + user?.firstName);
     return (
       <Container className="flex flex-col gap-3">
@@ -25,5 +25,9 @@ export default function AdminDashboard() {
       </Container>
     );
   }
-  return <h1>Not authorized</h1>;
+  return (
+    <Container>
+      <h1 className="text-7xl font-bold text-center">Unauthorized</h1>
+    </Container>
+  )
 }
