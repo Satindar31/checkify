@@ -37,7 +37,8 @@ export default function NewCheckPage() {
       }
       else {
         toast.success("Successfuly created check. Redirecting to dashboard...");
-        return router.push("/dashboard");
+        router.push("/dashboard");
+        router.refresh();
       }
     });
   }

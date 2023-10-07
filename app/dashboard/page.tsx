@@ -18,7 +18,7 @@ export default async function DashboardPage() {
       userId: user?.id,
     }),
     next: {
-      revalidate: 3600
+      revalidate: 5
     }
   });
   const data = await response.json();
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
         </Link>
       ) : (
         checks.map((check) => (
-          <Card className="" key={check.id}>
+          <Card key={check.id}>
             <CardHeader><Link href={`/check/${check.id}`}>{check.name}</Link></CardHeader>
             <Divider />
 

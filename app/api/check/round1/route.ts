@@ -10,30 +10,53 @@ export async function GET() {
       take: 30,
     });
 
-    fetch(
+    await fetch(
       process.env.URL ??
         "https://" + process.env.VERCEL_URL + "/api/check/round2"
     );
 
     checks.map(async (check) => {
-      const response = await fetch(check.url);
-      if (!response.ok) {
-        // TODO SEND EMAIL ALERT TO CHECK OWNER
-        console.log("Check with ID" + check.id + " is down... Status: " + response.status)
-        return new Response("ERROR", {
-          status: response.status,
+      try {
+        const response = await fetch(check.url);
+        if (!response.ok) {
+          await prisma.website.update({
+            where: {
+              id: check.id,
+            },
+            data: {
+              status: response.statusText,
+              up: false,
+              response: response.status,
+            },
+          });
+        }
+        await prisma.website.update({
+          where: {
+            id: check.id,
+          },
+          data: {
+            status: response.statusText,
+            up: true,
+            response: response.status,
+          },
+        });
+      } catch (err: any) {
+        await prisma.website.update({
+          where: {
+            id: check.id,
+          },
+          data: {
+            status: "DOWN",
+            up: false,
+            response: -1,
+          },
         });
       }
-      return new Response("OK", {
-        status: 200,
-      });
     });
-  } catch (error: any) {
-    return new Response(
-      JSON.stringify({ errorMsg: error.message, error: error })
-    );
-  } finally {
-    await prisma.$disconnect();
+    return new Response("RUNNING CHECKS");
+  } catch (err: any) {
+    return new Response(err.message, {
+      status: 500,
+    });
   }
-  return new Response("RUNNING CHECKS")
 }
