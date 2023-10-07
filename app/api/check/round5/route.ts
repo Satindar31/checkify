@@ -21,6 +21,9 @@ export async function GET() {
       });
     }
     
+
+    await fetch(process.env.URL + "/api/check/round1")
+
     return new Response("OK", {
       status: 200,
     });
