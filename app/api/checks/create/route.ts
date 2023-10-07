@@ -16,7 +16,6 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log(process.env.NODE_ENV)
 
     return new Response(JSON.stringify(createdCheck), {
       status: 201,

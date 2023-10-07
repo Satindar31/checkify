@@ -34,7 +34,6 @@ export async function GET() {
           },
         });
 
-        console.log(updateCheck);
       } catch (err: any) {
         return new Response(JSON.stringify({ error: err.message }), {
           status: 500,

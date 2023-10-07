@@ -14,7 +14,6 @@ export default function AdminDashboard() {
       duration: 1500,
     });
 
-    console.log(process.env.NEXT_PUBLIC_URL)
 
     fetch(
       process.env.NEXT_PUBLIC_URL + "/api/check/round1" ??
