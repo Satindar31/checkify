@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "website" ADD COLUMN     "lastChecked" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

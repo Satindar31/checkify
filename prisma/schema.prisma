@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "cockroachdb"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model website {
@@ -17,6 +18,7 @@ model website {
   url String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  lastChecked DateTime @default(now())
   up Boolean @default(true)
   status String @default("pending")
   response Int?

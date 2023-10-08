@@ -13,6 +13,7 @@
     "@clerk/themes": "^1.7.7",
     "@nextui-org/react": "^2.1.13",
     "@prisma/client": "^5.4.1",
+    "@prisma/extension-accelerate": "^0.6.2",
     "@types/validator": "^13.11.2",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.4",

@@ -14,7 +14,6 @@ export default function AdminDashboard() {
       duration: 1500,
     });
 
-
     fetch(
       process.env.NEXT_PUBLIC_URL + "/api/check/round1" ??
         process.env.VERCEL_URL + "/api/check/round1",
