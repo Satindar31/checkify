@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client/edge";
 const prisma = new PrismaClient();
 
+export const runtime = "edge"
+
 export async function POST(req: Request) {
   const { name, URL, userId }: { name: string; URL: string; userId: string } =
     await req.json();
@@ -37,7 +39,7 @@ export async function POST(req: Request) {
             up: false,
             response: 404,
             status: "Could not resolve DNS."
-            
+
           },
         });
       }

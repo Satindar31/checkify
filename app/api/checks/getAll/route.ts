@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 const prisma = new PrismaClient();
+export const runtime = "edge"
 
 export async function POST(req: Request) {
   const { userId }: { userId: string } = await req.json();

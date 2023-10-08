@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
+export const runtime = "edge";
 
 export async function POST(req: Request) {
   const { userID }: { userID: string } = await req.json();

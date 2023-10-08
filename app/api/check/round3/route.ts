@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 const prisma = new PrismaClient();
+export const runtime = "edge"
 
 export async function GET() {
   const check = await prisma.website.findMany({
