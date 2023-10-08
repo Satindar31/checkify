@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client/edge";
 const prisma = new PrismaClient();
 
-import {render} from '@react-email/render'
+import { render } from "@react-email/render";
 import { Email } from "@/emails/down";
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 export const runtime = "edge";
 
@@ -35,8 +35,6 @@ export async function GET() {
               response: response.status,
             },
           });
-
-
         }
         await prisma.website.update({
           where: {
