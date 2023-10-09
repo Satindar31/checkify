@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export default function DeleteBtn({
   id,
@@ -27,6 +28,7 @@ export default function DeleteBtn({
       .then((res) => {
         if (res.ok) {
           toast.success("Check deleted.");
+          router.refresh()
           return router.refresh();
         } else {
           toast.error("Failed to delete check.");
@@ -42,12 +44,12 @@ export default function DeleteBtn({
 
   return (
     <Button
-      className={cn(className)}
+      className={cn(`${className}`)}
       size="sm"
       onPress={deleteCheck}
       color="danger"
     >
-      Delete
+      <AiOutlineDelete className="text-lg" />
     </Button>
   );
 }

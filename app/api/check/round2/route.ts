@@ -24,7 +24,7 @@ export async function GET() {
       );
 
       try {
-        const updateCheck = await prisma.website.update({
+       await prisma.website.update({
           where: {
             id: check.id,
           },

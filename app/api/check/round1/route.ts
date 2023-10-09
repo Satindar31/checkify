@@ -46,7 +46,7 @@ export async function GET() {
             response: response.status,
           },
         });
-      } catch (err: any) {
+      } catch(err: any) {
         await prisma.website.update({
           where: {
             id: check.id,

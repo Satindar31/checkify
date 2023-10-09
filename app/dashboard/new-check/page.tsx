@@ -48,7 +48,10 @@ export default function NewCheckPage() {
         return toast.error("Failed to create check. Try again.");
       } else {
         toast.success("Successfuly created check. Redirecting to dashboard...");
+        router.refresh()
         router.push("/dashboard");
+        router.refresh()
+        setTimeout(() => {}, 50);
         return router.refresh();
       }
     });

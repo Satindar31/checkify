@@ -7,6 +7,7 @@ import { Link } from "@nextui-org/link";
 import { Button } from "@nextui-org/button";
 import { UserButton, currentUser } from "@clerk/nextjs";
 import DeleteBtn from "@/components/dashboard/deleteBtn";
+import EditBtn from "@/components/dashboard/editBtn";
 
 export default async function DashboardPage() {
   const user = await currentUser();
@@ -46,9 +47,10 @@ export default async function DashboardPage() {
         ) : (
           checks.map((check) => (
             <Card key={check.id}>
-              <CardHeader className="flex flex-row items-stretch">
+              <CardHeader className="flex flex-row items-stretch gap-5">
                 <Link href={`/check/${check.id}`}>{check.name}</Link>
                 <DeleteBtn id={check.id} />
+                <EditBtn checkId={check.id} />
               </CardHeader>
               <Divider />
 
@@ -56,7 +58,10 @@ export default async function DashboardPage() {
                 {check.up ? (
                   <div>Up</div>
                 ) : (
-                  <div>Down Code: {check.response}</div>
+                  <>
+                    <div>Down</div>
+                    <div>Down Code: {check.response}</div>
+                  </>
                 )}
               </CardBody>
             </Card>
