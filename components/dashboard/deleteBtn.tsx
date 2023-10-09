@@ -48,6 +48,7 @@ export default function DeleteBtn({
       size="sm"
       onPress={deleteCheck}
       color="danger"
+      isIconOnly
     >
       <AiOutlineDelete className="text-lg" />
     </Button>

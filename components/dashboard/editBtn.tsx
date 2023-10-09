@@ -80,7 +80,7 @@ export default function EditBtn({
 
   return (
     <>
-      <Button onPress={onOpen} size="sm" className={cn(className)}>
+      <Button isIconOnly onPress={onOpen} size="sm" className={cn(className)}>
         <AiOutlineEdit />
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
