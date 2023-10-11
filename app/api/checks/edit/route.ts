@@ -20,9 +20,10 @@ export async function PUT(req: Request) {
       },
     });
     return new Response(JSON.stringify(check), {
-      status: 204,
+      status: 200,
     });
   } catch (err: any) {
+    console.log(err);
     return new Response(JSON.stringify(err), {
       status: 500,
     });

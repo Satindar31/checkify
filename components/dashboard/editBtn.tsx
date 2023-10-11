@@ -30,6 +30,7 @@ export default function EditBtn({
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [validURL, setValidURL] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useUser();
 
@@ -58,6 +59,7 @@ export default function EditBtn({
     toast("Editing check...", {
       duration: 1500,
     });
+    setLoading(true);
     fetch("/api/checks/edit", {
       method: "PUT",
       body: JSON.stringify({
@@ -65,17 +67,29 @@ export default function EditBtn({
         name: name,
         URL: url,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        toast.success("Successfuly edited check!", {
-          icon: "success",
-        });
-        router.refresh();
-        router.push("/dashboard");
-        setTimeout(() => {}, 50);
-        return router.refresh();
-      }
-    });
+      cache: "no-cache",
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Successfuly edited check!", {
+            icon: "success",
+          });
+          router.refresh();
+          setTimeout(() => {}, 50);
+          setLoading(false);
+          return router.refresh();
+        }
+        if (!res.ok) {
+          res.json().then((data) => console.error(data));
+          setLoading(false);
+          return toast.error("An error occured while editing check.");
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error("An error occured while editing check.");
+        console.error(err);
+      });
   }
 
   return (
@@ -110,10 +124,11 @@ export default function EditBtn({
                   Discard Changes
                 </Button>
                 <Button
+                  isLoading={loading}
                   color="primary"
                   onPress={() => {
-                    editCheck;
-                    onClose;
+                    editCheck();
+                    onClose();
                   }}
                 >
                   Save check
