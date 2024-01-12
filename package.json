@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.25.2",
+    "@clerk/nextjs": "^4.29.3",
     "@clerk/themes": "^1.7.7",
     "@nextui-org/react": "^2.1.13",
     "@prisma/client": "^5.4.1",
